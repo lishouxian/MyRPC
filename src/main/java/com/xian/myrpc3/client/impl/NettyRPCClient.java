@@ -32,17 +32,7 @@ public class NettyRPCClient implements RPCClient {
         eventLoopGroup = new NioEventLoopGroup();
         bootstrap = new Bootstrap();
         bootstrap.group(eventLoopGroup).channel(NioSocketChannel.class)
-                .handler(new ChannelInitializer() {
-                    @Override
-                    protected void initChannel(Channel channel) throws Exception {
-                        ChannelPipeline pipeline = channel.pipeline();
-                        // 使用自定义的编解码器
-                        pipeline.addLast(new StringDecoder());
-                        // 编码需要传入序列化器，这里是json，还支持ObjectSerializer，也可以自己实现其他的
-                        pipeline.addLast(new StringEncoder());
-                        pipeline.addLast(new NettyClientHandler());
-                    }
-                });
+                .handler(new NettyClientInitializer());
     }
 
     @Override

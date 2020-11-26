@@ -23,8 +23,8 @@ public class TestClient {
 // 代理客户端根据不同的服务，获得一个代理类， 并且这个代理类的方法以或者增强（封装数据，发送请求）
         UserService userService = rpcClientProxy.getProxy(UserService.class);
 //// 调用方法
-        User userByUserId = userService.getUserByUserId(10);
-        System.out.println(userByUserId);
+//        User userByUserId = userService.getUserByUserId(10);
+//        System.out.println(userByUserId);
 //
 //        // 服务的方法2
 //        User user = User.builder().userName("张三").id(100).sex(true).build();

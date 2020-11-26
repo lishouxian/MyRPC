@@ -1,6 +1,7 @@
-package com.xian.myrpc3.server.impl;
+package com.xian.myrpc3.client.impl;
 
 import com.xian.myrpc3.server.ServiceProvider;
+import com.xian.myrpc3.server.impl.NettyRPCServerHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -9,18 +10,8 @@ import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.serialization.ClassResolver;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
-import lombok.AllArgsConstructor;
 
-/**
- * @Auther: lishouxian
- * @Date: 2020/11/26 15:37
- * @Description: NettyServerInitializer
- */
-@AllArgsConstructor
-public class NettyServerInitializer extends ChannelInitializer<SocketChannel> {
-    private ServiceProvider serviceProvider;
+public class NettyClientInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
@@ -36,7 +27,7 @@ public class NettyServerInitializer extends ChannelInitializer<SocketChannel> {
             public Class<?> resolve(String className) throws ClassNotFoundException {
                 return Class.forName(className);
             }
-        }));        System.out.println(serviceProvider);
-        pipeline.addLast(new NettyRPCServerHandler(serviceProvider));
+        }));
+        pipeline.addLast(new NettyClientHandler());
     }
 }
