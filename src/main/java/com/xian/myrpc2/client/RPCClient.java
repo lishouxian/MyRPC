@@ -1,8 +1,9 @@
-package com.xian.myrpc1.client;
+package com.xian.myrpc2.client;
 
-import com.xian.myrpc1.service.UserService;
-import com.xian.myrpc1.service.entity.User;
-
+import com.xian.myrpc2.service.BlogService;
+import com.xian.myrpc2.service.UserService;
+import com.xian.myrpc2.service.entity.Blog;
+import com.xian.myrpc2.service.entity.User;
 
 
 /**
@@ -24,6 +25,10 @@ public class RPCClient {
         User user = User.builder().userName("张三").id(100).sex(true).build();
         Integer integer = proxy.insertUserId(user);
         System.out.println("向服务端插入数据："+integer);
+        BlogService blogService = clientProxy.getProxy(BlogService.class);
+        Blog blogById = blogService.getBlogById(10000);
+        System.out.println("从服务端得到的blog为：" + blogById);
+
     }
 }
 
