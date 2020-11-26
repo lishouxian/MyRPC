@@ -6,9 +6,6 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
-import io.netty.handler.codec.serialization.ClassResolver;
-import io.netty.handler.codec.serialization.ObjectDecoder;
-import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import lombok.AllArgsConstructor;
@@ -32,7 +29,7 @@ public class NettyServerInitializer extends ChannelInitializer<SocketChannel> {
         // 这里使用的还是java 序列化方式， netty的自带的解码编码支持传输这种结构
         pipeline.addLast(new StringEncoder());
         pipeline.addLast(new StringDecoder());
-        System.out.println(serviceProvider.getInterfaceProvider());
+        System.out.println(serviceProvider);
         pipeline.addLast(new NettyRPCServerHandler(serviceProvider));
     }
 }
