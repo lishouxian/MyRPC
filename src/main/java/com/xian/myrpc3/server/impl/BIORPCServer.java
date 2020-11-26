@@ -1,6 +1,8 @@
-package com.xian.myrpc2.server;
+package com.xian.myrpc3.server.impl;
 
-import com.xian.myrpc2.server.utils.WorkThread;
+import com.xian.myrpc3.server.RPCServer;
+import com.xian.myrpc3.server.ServiceProvider;
+import com.xian.myrpc3.server.utils.WorkThread;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,12 +14,12 @@ import java.util.Map;
  * @Date: 2020/11/26 14:36
  * @Description: SimpleRPCRPCServer
  */
-public class SimpleRPCRPCServer implements RPCServer {
+public class BIORPCServer implements RPCServer {
     // 存着服务接口名-> service对象的map
     private Map<String, Object> serviceProvide;
 
-    public SimpleRPCRPCServer(Map<String,Object> serviceProvide){
-        this.serviceProvide = serviceProvide;
+    public BIORPCServer(ServiceProvider serviceProvide){
+        this.serviceProvide = serviceProvide.getInterfaceProvider();
     }
 
     public void start(int port) {

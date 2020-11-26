@@ -5,9 +5,6 @@ import com.xian.myrpc2.service.Impl.BlogServiceImpl;
 import com.xian.myrpc2.service.Impl.UserServiceImpl;
 import com.xian.myrpc2.service.UserService;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @Auther: lishouxian
  * @Date: 2020/11/26 14:35
@@ -25,7 +22,7 @@ public class TestServer {
         serviceProvider.provideServiceInterface(userService);
         serviceProvider.provideServiceInterface(blogService);
 
-        RPCServer RPCServer = new SimpleRPCRPCServer(serviceProvider.getInterfaceProvider());
+        RPCServer RPCServer = new SimpleRPCServer(serviceProvider.getInterfaceProvider());
         RPCServer.start(8899);
     }
 }
